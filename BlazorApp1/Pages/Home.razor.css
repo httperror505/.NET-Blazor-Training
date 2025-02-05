@@ -2,7 +2,38 @@
 }
 
 h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 900;
     color: #333;
 }
+
+.datetime {
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    color: black;
+}
+
+.centered-container {
+    display: block;
+    justify-content: center;
+    /*    align-items: center;*/
+    height: 100vh; /* Make it take the full viewport height */
+    margin: 0; /* Remove any default margin */
+    padding: 10rem;
+}
+
+.Button2 {
+    background-color: #4CAF50; /* Green */
+    border-radius: 10px;
+
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+

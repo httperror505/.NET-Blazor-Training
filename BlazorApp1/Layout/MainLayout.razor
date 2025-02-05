@@ -1,4 +1,28 @@
 ﻿@inherits LayoutComponentBase
+
+@using System.Timers;
+
+@code {
+	private string currentTime;
+	private Timer timer;
+	protected override void OnInitialized()
+	{
+		currentTime = DateTime.Now.ToString();
+		timer = new Timer(1000); // Set the timer interval to 1 second
+		timer.Elapsed += UpdateTime;
+		timer.Start();
+	}
+	private void UpdateTime(object sender, ElapsedEventArgs e)
+	{
+		currentTime = DateTime.Now.ToString();
+		InvokeAsync(StateHasChanged);
+	}
+	public void Dispose()
+	{
+		timer?.Dispose();
+	}
+}
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -7,6 +31,12 @@
     <main>
         <div class="top-row px-4">
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+
+			<div class="centered-container align-items-center">
+				<h5 class="datetime fw-bolder">@currentTime</h5>
+			</div>
         </div>
 
         <article class="content px-4">

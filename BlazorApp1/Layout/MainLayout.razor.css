@@ -76,3 +76,17 @@ main {
         padding-right: 1.5rem !important;
     }
 }
+
+.datetime {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    font-size: medium;
+    color: darkslateblue;
+}
+
+.centered-container {
+    justify-content: center;
+    align-items: center;
+    margin: 0; /* Remove any default margin */
+   
+}
