@@ -8,6 +8,14 @@ main {
     flex: 1;
 }
 
+a {
+    font-family: 'Poppins', sans-serif;
+}
+
+a:active, a:visited, a:link {
+    text-decoration-line: underline;
+    color: #007bff;
+}
 
 .sidebar {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
@@ -16,10 +24,11 @@ main {
 .top-row {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
-    height: 3.5rem;
+    justify-content: space-around;
+    height: 5rem;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
     .top-row ::deep a, .top-row ::deep .btn-link {
@@ -77,8 +86,40 @@ main {
     }
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-around; /* Distribute the logo, links, and datetime evenly */
+    width: 100%;
+    max-width: 1200px; /* Adjust to your desired max width */
+    margin: 0 auto; /* Center the navbar */
+}
+
+.logo-container {
+    flex: 1; /* Allow the logo to take as much space as possible */
+}
+
+.links-container {
+    flex: 3; /* Allow the links section to take up more space */
+    display: flex;
+    justify-content: center; /* Center the links horizontally */
+    gap: 1rem; /* Add spacing between the links */
+}
+
+.datetime-container {
+    flex: 1; /* Allow the datetime section to take some space */
+    display: flex;
+    justify-content: flex-end; /* Align datetime to the right */
+}
+
+.logo {
+    min-width: auto
+    max-width: fit-content;
+}
+
 .datetime {
-    margin-left: 1rem;
+    font-family: 'Poppins';
+/*    position: absolute;*/
+    margin-left: 3rem;
     margin-top: 0.5rem;
     font-size: medium;
     color: darkslateblue;

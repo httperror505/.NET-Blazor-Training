@@ -2,22 +2,76 @@
 
 <PageTitle>Home</PageTitle>
 
+
+@inject IJSRuntime JS
+
 @code {
-   
+	private async Task ScrollToSection(string sectionId)
+	{
+		await JS.InvokeVoidAsync("scrollToSection", sectionId);
+	}
 }
+
 @{
 	var Name = "One-Stop Web App";
 }
 
 
-<div class="centered-container text-center" >
+<div class="centeredContainer text-center" >
+	    
+		@* <h1>@Name</h1> *@
+		<h1>All Your Productivity Tools in One Place</h1>
 
-	    <h1>@Name</h1>
+		<p class="datetime">Maximize your efficiency with our all-in-one suite of productivity tools—task management, notes, calculations, weather, and more. Stay organized, focused, and on top of your day!</p>
 
-        <p class="datetime">The website that houses all your productivity needs.</p>
+		<!--when button is clicked, scroll down to another section-->
+	<button id="Button2" class="Button2" onclick=" () => ScrollToSection(" featured-tools")">Get Started</button>
 
-		<button id="Button2" class="Button2">Get Started</button>
-
+	
 </div>
+
+<img src="/downarrow.png" alt="Down" class="down-arrow" />
+
+<section id="featured-tools">
+	<div class="container">
+
+		<h2 class="text-center">Featured Tools</h2>
+		<p class="text-center">Explore our productivity tools and start getting things done.</p>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Sticky Notes</h5>
+						<p class="card-text">Jot down your thoughts, ideas, and reminders with our sticky notes feature. Keep your notes organized and accessible.</p>
+						<a href="notes" class="btn btn-primary">Go to Notes</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title
+						">To-Do List</h5>
+						<p class="card-text">Stay on top of your tasks and manage your time effectively with our to-do list feature. Prioritize your tasks and track your progress.</p>
+						<a href="todo" class="btn btn-primary">Go to To-Do List</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title
+						">
+							Calculator
+						</h5>
+						<p class="card-text">Perform basic and advanced calculations with our calculator feature. Solve math problems, convert units, and more.</p>
+						<a href="calculator" class="btn btn-primary">Go to Calculator</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 
