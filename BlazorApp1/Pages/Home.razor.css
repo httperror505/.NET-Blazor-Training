@@ -4,28 +4,37 @@
 h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 900;
+    font-size: 4rem;
+    color: #333;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
     color: #333;
 }
 
 .datetime {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins';
     font-size: medium;
     color: black;
+    padding-inline: 4rem;
 }
 
-.centered-container {
+.centeredContainer {
     display: block;
+/*    background-color: antiquewhite;*/
     justify-content: center;
-    /*    align-items: center;*/
-    height: 100vh; /* Make it take the full viewport height */
+    align-items: center;
+    /*height: 100vh;*/ /* Make it take the full viewport height */
     margin: 0; /* Remove any default margin */
-    padding: 10rem;
+    padding: 6rem;
 }
 
 .Button2 {
-    background-color: #4CAF50; /* Green */
+    background-color: #006b4b; /* Green */
     border-radius: 10px;
-
+    font-family: 'Poppins';
     border: none;
     color: white;
     padding: 15px 32px;
@@ -33,7 +42,6 @@ h1 {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 2.5rem 2px;
     cursor: pointer;
 }
-
