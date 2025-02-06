@@ -45,3 +45,41 @@ h2 {
     margin: 2.5rem 2px;
     cursor: pointer;
 }
+
+.featured-tools {
+    margin-block-start: 1rem;
+    margin-block-end: 4rem;
+}
+
+.card {
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.card-text {
+    font-family: 'Poppins';
+    font-size: 1rem;
+    color: #333;
+}
+
+.btn {
+    background-color: #006b4b; /* Green */
+    border-radius: 10px;
+    font-family: 'Poppins';
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
