@@ -1,7 +1,101 @@
-﻿page "/notes"
+﻿@page "/notes"
 
-<h3>Component</h3>
+<PageTitle>Notes</PageTitle>
 
 @code {
+	@* Modal *@
+	private bool isModalOpen = false;
 
+	private void ShowModal()
+	{
+		isModalOpen = true;
+	}
+
+	private void CloseModal()
+	{
+		isModalOpen = false;
+	}
+
+	@* Notes Management *@
+	private string newNoteText = "";
+	private List<string> NotesList { get; set; } = new List<string>();
+
+	private void AddNote()
+	{
+		if (!string.IsNullOrWhiteSpace(newNoteText))
+		{
+			NotesList.Add(newNoteText);
+			newNoteText = "";
+			CloseModal();
+		}
+	}
+}
+
+<div>
+	<div class="PageTitle text-center">
+		<h1>Notes</h1>
+
+		<p>Take notes, jot down ideas, and keep track of important information with our sticky notes feature.</p>
+	</div>
+
+	<div class="add-button-subheader">
+		<button class="btn btn-secondary">Sort By</button>
+		<button class="btn btn-success me-md-5" @onclick="ShowModal">Add New Note</button>
+	</div>
+
+	@* <!-- Add a horizontal line centered using flex --> *@
+	@* <div style="display: flex; justify-content: center; margin: 20px 0;"> *@
+	@* 	<hr style="border: 1px solid black; width: 80%;" /> *@
+	@* </div> *@
+
+	<div class="container">
+		<div class="row justify-content-between">
+			<!-- This will center the items in the row -->
+			<!-- Add New Note Button -->
+			<div class="col-md-3 mb-3">
+				<div class="card clickable-card" @onclick="ShowModal">
+					<div class="card-body">
+						<img src="/add.png" alt="Add Button" class="addImage" />
+						<p>Add New Note</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Display Added Notes -->
+			@foreach (var note in NotesList)
+			{
+				<div class="col-md-3 mb-3">
+					<div class="card note-card">
+						<div class="card-body">
+							<p>@(note.Length > 50 ? $"{note.Substring(0, 50)}..." : note)</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+
+
+</div>
+
+@* Modal *@
+@if (isModalOpen)
+{
+	<div class="modal-backdrop">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Add New Note</h5>
+					<button type="button" class="btn-close" @onclick="CloseModal"></button>
+				</div>
+				<div class="modal-body">
+					<textarea @bind="newNoteText" rows="2" cols="20" class="form-control"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" @onclick="AddNote">Save Note</button>
+					<button type="button" class="btn btn-secondary" @onclick="CloseModal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 }

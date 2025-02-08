@@ -1,7 +1,171 @@
-﻿page "/todo"
+﻿@page "/todo"
+@inject IJSRuntime JS
 
-<h3>Todo</h3>
+<PageTitle>To-Do List</PageTitle>
 
 @code {
+    private string newTaskTitle = "";
+    private string newTaskBody = "";
+    private bool isPriority = false;
+    private bool isModalOpen = false;
+    private List<TaskItem> TasksList = new();
 
+    private async Task ShowModal()
+    {
+        isModalOpen = true;
+        await Task.Delay(100); // Small delay to ensure UI loads
+        await JS.InvokeVoidAsync("initializeQuill", "taskBodyEditor");
+    }
+
+    private void CloseModal() => isModalOpen = false;
+
+  //   private void AddTask()
+  //   {
+		// Console.WriteLine("Add Task Clicked");
+
+  //       if (!string.IsNullOrWhiteSpace(newTaskTitle) && !string.IsNullOrWhiteSpace(newTaskBody))
+  //       {
+  //           var newTask = new TaskItem
+  //               {
+  //                   Title = newTaskTitle,
+  //                   Body = newTaskBody,
+  //                   IsPriority = isPriority
+  //               };
+
+		// 	Console.WriteLine($"New Task: {newTask.Title} - {newTask.Body} - {newTask.IsPriority}");
+
+  //           if (isPriority)
+  //               TasksList.Insert(0, newTask);
+  //           else
+  //               TasksList.Add(newTask);
+
+  //           newTaskTitle = "";
+  //           newTaskBody = "";
+  //           isPriority = false;
+  //           CloseModal();
+  //       }
+  //       else {
+		// 	Console.WriteLine("Please fill in all fields");
+  //       }
+  //   }
+
+    private async Task AddTask()
+    {
+        newTaskBody = await JS.InvokeAsync<string>("getQuillContent", "taskBodyEditor-hidden");
+
+        if (!string.IsNullOrWhiteSpace(newTaskTitle) && !string.IsNullOrWhiteSpace(newTaskBody))
+        {
+            var newTask = new TaskItem
+                {
+                    Title = newTaskTitle,
+                    Body = newTaskBody,
+                    IsPriority = isPriority
+                };
+
+            Console.WriteLine($"New Task: {newTask.Title} - {newTask.Body} - {newTask.IsPriority}");
+
+            if (isPriority)
+                TasksList.Insert(0, newTask);
+            else
+                TasksList.Add(newTask);
+
+            newTaskTitle = "";
+            newTaskBody = "";
+            isPriority = false;
+            CloseModal();
+        }
+        else
+        {
+            Console.WriteLine("Please fill in all fields");
+        }
+    }
+
+
+    class TaskItem
+    {
+        public string Title { get; set; } = "";
+        public string Body { get; set; } = "";
+        public bool IsPriority { get; set; }
+    }
 }
+
+<div>
+    <div class="PageTitle text-center">
+        <h1>To-Do List</h1>
+
+        <p>Stay on top of your tasks and manage your time effectively with our to-do list feature. Prioritize your tasks and track your progress.</p>
+    </div>
+
+    <div class="add-button-subheader">
+        <!--legends: red for priority and green for not-->
+        <div class="legend">
+            <span class="priority-high">High Priority</span> <span class="priority-low">Low Priority</span>
+        </div>
+        <button class="btn btn-secondary">Sort By</button>
+        <button class="btn btn-success me-md-5" @onclick="ShowModal">Add New Task</button>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- This will center the items in the row -->
+            <!-- Add New Task Button -->
+            <div class="col-md-3 mb-3">
+                <div class="card clickable-card" @onclick="ShowModal">
+                    <div class="card-body">
+                        <img src="/add.png" alt="Add Button" class="addImage" />
+                        <p>Add New Task</p>
+                    </div>
+                </div>
+            </div>
+             @foreach (var task in TasksList)
+                 {
+                   <div class="col-md-3 mb-3">
+                    <div class="card" style="@($"{(task.IsPriority ? "border-left: 4px solid red;" : "border-left: 4px solid green;")}" )">
+                        <div class="card-body">
+                                <h5 class="card-title">@task.Title</h5>
+                                 <p class="card-text">@((MarkupString)task.Body)</p>
+                            </div>
+                        </div>
+                   </div>
+                  }
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        
+    </div>
+
+
+</div>
+
+@if (isModalOpen)
+{
+    <div class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Task</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <label>Task Title</label>
+                    <input type="text" @bind="newTaskTitle" class="form-control" />
+
+                    <label class="mt-2">Task Body</label>
+                    <div id="taskBodyEditor" style="height: 200px;"></div>
+                    <input type="hidden" id="taskBodyEditor-hidden" @bind="newTaskBody" />
+
+                    <div class="form-check mt-2">
+                        <input type="checkbox" class="form-check-input" @bind="isPriority" />
+                        <label class="form-check-label">Mark as Priority</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" @onclick="AddTask">Save</button>
+                    <button class="btn btn-secondary" @onclick="CloseModal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    
