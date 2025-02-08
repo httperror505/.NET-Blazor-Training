@@ -10,11 +10,12 @@ main {
 
 a {
     font-family: 'Poppins', sans-serif;
+    color: darkslateblue;
 }
 
 a:active, a:visited, a:link {
     text-decoration-line: underline;
-    color: #007bff;
+    color: #006b4b;
 }
 
 .sidebar {

@@ -6,10 +6,14 @@
 @inject IJSRuntime JS
 
 @code {
-	private async Task ScrollToSection(string sectionId)
+	// This method will be used to scroll to the section
+	private async Task ScrollToSection()
 	{
-		await JS.InvokeVoidAsync("scrollToSection", sectionId);
+		// Scroll logic here will be handled by Blazor without JavaScript
+		// await FeaturedToolsSection.ScrollIntoViewAsync();
 	}
+
+	// Reference to the section we want to scroll to
 }
 
 @{
@@ -25,7 +29,7 @@
 		<p class="datetime">Maximize your efficiency with our all-in-one suite of productivity tools—task management, notes, calculations, weather, and more. Stay organized, focused, and on top of your day!</p>
 
 		<!--when button is clicked, scroll down to another section-->
-	<button id="Button2" class="Button2" onclick=" () => ScrollToSection(" featured-tools")">Get Started</button>
+	<button id="Button2" class="Button2">Get Started</button>
 	
 </div>
 
