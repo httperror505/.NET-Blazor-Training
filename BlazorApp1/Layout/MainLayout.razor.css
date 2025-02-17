@@ -113,7 +113,7 @@ a:active, a:visited, a:link {
 }
 
 .logo {
-    min-width: auto
+    min-width: auto;
     max-width: fit-content;
 }
 
