@@ -28,7 +28,7 @@ h2 {
     align-items: center;
     /*height: 100vh;*/ /* Make it take the full viewport height */
     margin: 0; /* Remove any default margin */
-    padding: 6rem;
+    padding: 6rem;  
 }
 
 .Button2 {
